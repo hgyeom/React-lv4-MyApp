@@ -15,6 +15,7 @@ function BoardDetail() {
   const mutation = useMutation(deletePost, {
     onSuccess: () => {
       queryClient.invalidateQueries("posts");
+      queryClient.invalidateQueries("post");
     },
   });
 
