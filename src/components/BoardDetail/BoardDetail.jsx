@@ -8,7 +8,9 @@ function BoardDetail() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { id } = useParams();
-  const { isLoading, isError, data } = useQuery("posts", () => getPost(id));
+  const { isLoading, isError, data, error } = useQuery(["post", id], () =>
+    getPost(id)
+  );
 
   const mutation = useMutation(deletePost, {
     onSuccess: () => {
@@ -32,7 +34,7 @@ function BoardDetail() {
     return <div>로딩중입니다.</div>;
   }
   if (isError) {
-    return <div>에러가 발생했습니다.</div>;
+    return <div>에러가 발생했습니다: {error.message}</div>;
   }
   return (
     <S.StDetailContainer>
