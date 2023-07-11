@@ -9,8 +9,8 @@ const getPosts = async () => {
 
 // 하나만
 const getPost = async (id) => {
-  const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts`);
-  return response.data.filter((post) => post.id === id);
+  const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`);
+  return response.data;
 };
 
 // POST
