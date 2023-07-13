@@ -14,3 +14,8 @@ export const StLink = styled(Link)`
   color: black;
   text-decoration: none;
 `;
+
+export const StBtnContainer = styled.div`
+  display: flex;
+  gap: 10px;
+`;

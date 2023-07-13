@@ -17,6 +17,7 @@ function Modify() {
   const mutation = useMutation(updatePost, {
     onSuccess: () => {
       queryClient.invalidateQueries("posts");
+      queryClient.invalidateQueries("post");
     },
   });
 

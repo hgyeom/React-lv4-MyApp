@@ -1,14 +1,13 @@
 import React from "react";
-import BoardDetail from "../components/BoardDetail/BoardDetail";
+import ModifyPage from "../components/Form/Modify";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-
-function Detail() {
+function Modify() {
   const isLogin = useSelector((state) => state.auth.isLogin);
   if (!isLogin) {
     return <Navigate to="/login" />;
   }
-  return <BoardDetail />;
+  return <ModifyPage />;
 }
 
-export default Detail;
+export default Modify;
