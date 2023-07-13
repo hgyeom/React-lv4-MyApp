@@ -9,7 +9,9 @@ const getPosts = async () => {
 
 // 하나만
 const getPost = async (id) => {
-  const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`);
+  const response = await axios.get(
+    `${process.env.REACT_APP_SERVER_URL}/posts/${id}`
+  );
   return response.data;
 };
 
@@ -30,14 +32,5 @@ const updatePost = async (updatePost) => {
 const deletePost = async (id) => {
   await axios.delete(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`);
 };
-
-// // 회원가입 구현시 사용
-// export const signup = async (userData) => {
-//   const response = await axios.post(
-//     `${process.env.REACT_APP_SERVER_URL}/users`,
-//     userData
-//   );
-//   return response.data;
-// };
 
 export { getPosts, getPost, addPost, deletePost, updatePost };

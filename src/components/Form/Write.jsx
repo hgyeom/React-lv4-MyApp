@@ -16,12 +16,12 @@ function Write() {
     },
   });
 
-  const [writer, onChangeWriterHandler] = useInput("");
-  const [title, onChangeTitleHandler] = useInput("");
-  const [password, onChangePasswordHandler] = useInput("");
-  const [contents, onChangeContentsHandler] = useInput("");
+  const [writer, onWriterChange] = useInput();
+  const [title, onTitleChange] = useInput();
+  const [password, onPasswordChange] = useInput();
+  const [contents, onContentsChange] = useInput();
 
-  const onClickSubmitButtonHandler = (e) => {
+  const onSubmitHandler = (e) => {
     e.preventDefault();
 
     if (!writer || !title || !password || !contents) {
@@ -40,34 +40,35 @@ function Write() {
     mutation.mutate(newPost);
     navigate("/");
   };
+
   return (
-    <S.StForm onSubmit={(e) => onClickSubmitButtonHandler(e)}>
+    <S.StForm onSubmit={(e) => onSubmitHandler(e)}>
       <S.StPostContainer>
         <S.StDiv>작성자</S.StDiv>
         <S.StInput
           type="text"
           placeholder="작성자"
           value={writer}
-          onChange={onChangeWriterHandler}
+          onChange={onWriterChange}
         />
         <S.StDiv>제목</S.StDiv>
         <S.StInput
           type="text"
           placeholder="제목"
           value={title}
-          onChange={onChangeTitleHandler}
+          onChange={onTitleChange}
         />
         <S.StDiv>비밀번호</S.StDiv>
         <S.StInput
           type="password"
           placeholder="수정, 삭제를 위한 비밀번호"
           value={password}
-          onChange={onChangePasswordHandler}
+          onChange={onPasswordChange}
         />
         <S.StDiv>내용</S.StDiv>
         <S.StTextArea
           value={contents}
-          onChange={onChangeContentsHandler}
+          onChange={onContentsChange}
         ></S.StTextArea>
 
         <S.StButtonArea>

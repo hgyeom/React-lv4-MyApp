@@ -4,12 +4,12 @@ import axios from "axios";
 export const signup = async (body) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_MOCK_SERVER_URL}/register`,
+      `${process.env.REACT_APP_AUTH_SERVER_URL}/register`,
       body
     );
     return response;
-  } catch (error) {
-    alert(error.response.data.message);
+  } catch (e) {
+    alert(e.response.data.message);
     return;
   }
 };
@@ -18,13 +18,31 @@ export const signup = async (body) => {
 export const login = async (body) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_MOCK_SERVER_URL}/login`,
+      `${process.env.REACT_APP_AUTH_SERVER_URL}/login`,
       body
     );
-    console.log(response);
+
     return response.data;
-  } catch (error) {
-    alert(error.response.data.message);
-    return error.response.data.message;
+  } catch (e) {
+    alert(e.response.data.message);
+    return e.response.data.message;
+  }
+};
+
+// 인가
+export const user = async () => {
+  const token = sessionStorage.getItem("jwtToken");
+  try {
+    await axios.get(`${process.env.REACT_APP_AUTH_SERVER_URL}/user`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return true;
+  } catch (e) {
+    if (e.response.status === 401) {
+      sessionStorage.removeItem("jwtToken");
+    }
+    return false;
   }
 };
