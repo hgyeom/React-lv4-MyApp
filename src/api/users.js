@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// 회원가입 구현시 사용
+// 회원가입
 export const signup = async (body) => {
   try {
     const response = await axios.post(
@@ -32,17 +32,23 @@ export const login = async (body) => {
 // 인가
 export const user = async () => {
   const token = sessionStorage.getItem("jwtToken");
-  try {
-    await axios.get(`${process.env.REACT_APP_AUTH_SERVER_URL}/user`, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
-    return true;
-  } catch (e) {
-    if (e.response.status === 401) {
-      sessionStorage.removeItem("jwtToken");
+  if (token) {
+    try {
+      await axios.get(`${process.env.REACT_APP_AUTH_SERVER_URL}/user`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      return true;
+    } catch (e) {
+      if (e.response.status === 401) {
+        alert(e.response.data.message);
+        sessionStorage.removeItem("jwtToken");
+      }
+      return false;
     }
+  } else {
+    alert("로그인이 필요합니다.");
     return false;
   }
 };
